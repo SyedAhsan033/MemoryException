@@ -1,0 +1,250 @@
+package memoryManagement;
+import java.util.ArrayList;
+import java.util.Stack; 
+import java.io.*;
+
+public class MemoryException {
+
+	//Stack
+	public static void main(String[] args)   
+	{  
+	Stack<Integer> stk= new Stack<>();  
+  
+	boolean result = stk.empty();  
+	System.out.println("Is the stack empty? " + result);  
+
+	stk.push(78);  
+	stk.push(113);  
+	stk.push(90);  
+	stk.push(120);  
+
+	System.out.println("Elements in Stack: " + stk);  
+	result = stk.empty();  
+	System.out.println("Is the stack empty? " + result);  
+	}
+	
+	
+	
+	
+	//Heap sort program: min heap.
+    public void sort(int arr[])
+    {
+        int n = arr.length;
+        
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(arr, n, i);
+
+        for (int i=n-1; i>=0; i--)
+        {
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+  
+            heapify(arr, i, 0);
+        }
+    }
+  
+    void heapify(int arr[], int n, int i)
+    {
+        int largest = i;  
+        int l = 2*i + 1; 
+        int r = 2*i + 2; 
+  
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+  
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
+  
+        if (largest != i)
+        {
+            int swap = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = swap;
+
+            heapify(arr, n, largest);
+        }
+    }
+
+    static void printArray(int arr[])
+    {
+        int n = arr.length;
+        for (int i=0; i<n; ++i)
+            System.out.print(arr[i]+" ");
+        System.out.println();
+    }
+  
+    public static void main1(String args[])
+    {
+        int arr[] = {12, 11, 13, 5, 6, 7};
+        int n = arr.length;
+  
+        MemoryException ob = new MemoryException();
+        ob.sort(arr);
+  
+        System.out.println("Sorted array is");
+        printArray(arr);
+    }
+   
+    
+    
+    
+    //Garbage Collection
+     public void finalize()
+     {
+         System.out.println("object is garbage collected");
+     }
+     public static void main2(String args[]){  
+      MemoryException s1=new MemoryException();  
+      MemoryException s2=new MemoryException();  
+      s1=null;  
+      s2=null;  
+      System.gc();  
+     } 
+     
+     
+     
+     
+     //Exceptional Handling
+     public static void main3(String args[])
+     {  
+    	   try{  
+    	      
+    	      int data=100/0;  
+    	   }catch(ArithmeticException e){System.out.println(e);}  
+    	   //rest code of the program   
+    	   System.out.println("rest of the code...");  
+    	  }  
+     
+     
+     
+
+     //Null point exception
+     public void doSomething() {
+    	    Integer number = null;
+
+    	    if (number > 0) {
+    	      System.out.println("Positive number");
+    	    }
+    	  }
+    
+     
+    
+     
+     //Try-Catch method
+     public static void main4(String[] args) {  
+         try  
+         {  
+         int data=50/0; 
+         }  
+             //handling the exception  
+         catch(ArithmeticException e)  
+         {  
+             System.out.println(e);  
+         }  
+         System.out.println("rest of the code");  
+     }
+     
+     
+     
+     
+     //Multiple Catch-Block method
+     public static void main5(String[] args) {  
+         
+         try{    
+              int arr[]=new int[5];    
+              arr[5]=30/0;    
+             }    
+             catch(ArithmeticException e)  
+                {  
+                 System.out.println("Arithmetic Exception occurs");  
+                }    
+             catch(ArrayIndexOutOfBoundsException e)  
+                {  
+                 System.out.println("ArrayIndexOutOfBounds Exception occurs");  
+                }    
+             catch(Exception e)  
+                {  
+                 System.out.println("Parent Exception occurs");  
+                }             
+             System.out.println("rest of the code");    
+  }  
+     
+     
+     
+     
+     //Custom Exception
+     class CustomException extends MemoryException
+     {
+       
+     }
+
+     public class setText
+     {
+         public static void main6(String args[])
+         {
+             try
+             {
+
+                 throw new CustomException();
+             }
+             catch (CustomException ex)
+             {
+                 System.out.println("Caught");
+                 System.out.println(ex.getMessage());
+             }
+         }
+     }
+     
+     
+     
+   //throws keyword
+     public class Main {
+    	  static void checkAge(int age) throws ArithmeticException {
+    	    if (age < 18) {
+    	      throw new ArithmeticException("Access denied - You must be at least 18 years old.");
+    	    }
+    	    else {
+    	      System.out.println("Access granted - You are old enough!");
+    	    }
+    	  }
+
+    	  public static void main(String[] args) {
+    	    checkAge(15); 
+    	  }
+    	}
+     
+     
+     
+     
+     //JVM Thrown Exceptions
+     public static void main7(String args[]) {
+         int num[] = {1, 2, 3, 4};
+         System.out.println(num[5]);
+      }
+     
+     
+     
+     
+     //Programmatically thrown Exception using throw keyword
+     public static void method() throws FileNotFoundException {  
+    	  
+         FileReader file = new FileReader("C:\\Users\\SyedAhsan\\Desktop\\abc.txt");  
+         BufferedReader fileInput = new BufferedReader(file);  
+   
+       
+         throw new FileNotFoundException();  
+       
+     }    
+     public static void main8(String args[]){  
+         try  
+         {  
+             method();  
+         }   
+         catch (FileNotFoundException e)   
+         {  
+             e.printStackTrace();  
+         }  
+         System.out.println("rest of the code...");    
+   }    
+}
